@@ -43,7 +43,7 @@
 
 package leetcode.editor.cn;
 
-import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  * @author ziker
@@ -65,10 +65,10 @@ public class OnlineStockSpan901 {
 
 	//leetcode submit region begin(Prohibit modification and deletion)
 	class StockSpanner {
-        // 价格
-		ArrayList<Integer> stack = new ArrayList<>();
-        // 每天的价格跨度
-		ArrayList<Integer> prices = new ArrayList<>();
+		// 价格
+		Stack<Integer> stack = new Stack<>();
+		// 每天的价格跨度
+		Stack<Integer> prices = new Stack<>();
 
 		public StockSpanner() {
 
@@ -76,18 +76,13 @@ public class OnlineStockSpan901 {
 
 		public int next(int price) {
 			int count = 1;
-			int i = stack.size() - 1;
-            // 计算自己到上一个自己之间的跨度
-			while (i >= 0 && stack.get(i) < price) {
-				count++;
-				i--;
+			// 合并 自己到前面的自己之间的 整个下降渠道的坡度，因为后面的能找到自己一定比自己大，所以直接合并当前自己到上一个自己之间的整个坡度
+			while (!stack.isEmpty() && stack.peek() <= price) {
+				stack.pop();
+				count += prices.pop();
 			}
-            // 如果遇到上一个同样的价格，直接再加上当天的价格跨度
-			if (i >= 0 && price == stack.get(i)) {
-				count += prices.get(i);
-			}
-			stack.add(price);
-			prices.add(count);
+			stack.push(price);
+			prices.push(count);
 			return count;
 		}
 	}
@@ -116,5 +111,11 @@ public class OnlineStockSpan901 {
 解答成功:
 	执行耗时:176 ms,击败了11.62% 的Java用户
 	内存消耗:49.5 MB,击败了62.03% 的Java用户
+
+> 2022/10/21 11:31:10
+解答成功:
+	执行耗时:59 ms,击败了29.05% 的Java用户
+	内存消耗:50.2 MB,击败了27.91% 的Java用户
+
 
  */
