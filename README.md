@@ -1,4 +1,4 @@
 # LcExercise
 LeetCode Topic exercise
 
-** LeetCode 刷题记录 **
+LeetCode 刷题记录
