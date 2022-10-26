@@ -101,7 +101,6 @@ public class ShortestSubarrayWithSumAtLeastK862 {
 			int[] sum = new int[nums.length];
 			// 0：和值 1:起始坐标
 			PriorityQueue<int[]> queue = new PriorityQueue<>((o1, o2) -> o2[0] - o1[0]);
-//			Queue<int[]> queue = new ArrayDeque<>();
 			int minLen = Integer.MAX_VALUE;
 			for (int i = 0; i < nums.length; i++) {
 				queue.add(new int[]{0, i});
